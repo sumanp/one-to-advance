@@ -1,4 +1,4 @@
-## Effective Ruby: 48 Specific Ways to Write Better Ruby
+## Ways to Write Better Ruby
 
 ### 1. In ruby every value is true except nil & false.
 Unlike in a lot of languages, the number zero is true in Ruby.
@@ -72,3 +72,28 @@ Things to Remember
 • To prevent assigning new values to existing constants, freeze the module they’re defined in.
 
 ### 5. Pay Attention to Runtime Warnings
+When you give your Ruby code to the interpreter, it has to perform some compiler-like tasks before it starts to execute the code. It’s useful to think about Ruby working with our code in two phases, compile time and run time.
+
+The majority of them are generated when Ruby encounters ambiguous syntax and proceeds by picking one of many possible interpretations. You obviously don’t want Ruby guessing what you really meant. Imagine what would happen if a future version of Ruby changed its interpretation of ambiguous code and your program started behaving differently! By paying attention to these types of warnings you can make the necessary changes to your code and completely avoid the ambiguity in the first place. Here’s an example where the code isn’t completely clear and Ruby produces a warning:
+
+Example:
+
+```irb> dirs = ['usr', 'bin', 'local']
+irb> File.join *dirs
+warning: `*' interpreted as argument prefix
+
+irb> File.join(*dirs)
+---> "usr/local/bin"
+
+irb> dirs.map &:length
+warning: `&' interpreted as argument prefix
+
+irb> dirs.map(&:length)
+---> [3, 5, 3]
+```
+
+Things to Remember
+
+• Use the “-w” command line option to the Ruby interpreter to enable compile time and run time warnings. You can also set the RUBYOPT environment variable to “-w”.
+
+• If you must disable run time warnings, do so by temporarily setting the $VERBOSE global variable to nil.
