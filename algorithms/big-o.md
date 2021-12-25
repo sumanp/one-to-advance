@@ -2,6 +2,8 @@
 
 Big O complexity can be visualized with this graph:
 
+![bigo-graph](https://github.com/sumanp/one-to-advance/blob/master/img/big_o.png)
+
 Big O Analysis
 
 The simplest definition I can give for Big-O notation is this:
